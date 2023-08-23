@@ -1,6 +1,5 @@
 import Chatbot from "@/components/Chatbot";
 import Providers from "@/components/Providers";
-import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -21,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body className={inter.className}>
-          <Toaster />
           <Chatbot />
           {children}
         </body>
