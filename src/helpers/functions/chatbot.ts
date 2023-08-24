@@ -1,6 +1,8 @@
+import { text } from '@/context/text'
 import { openai } from '@/lib/open-ai'
 import { supabase } from '@/lib/supabase'
 import OpenAI from 'openai'
+
 
 export async function injectCustomData(messages: OpenAI.Chat.ChatCompletionMessage[]) {
   const lastMessage = messages.pop()
@@ -28,18 +30,19 @@ export async function injectCustomData(messages: OpenAI.Chat.ChatCompletionMessa
     contextText += `${content.trim()}---\n`
   }
 
+
   const prompt = `
-      You are 'Fania', the helpful virtual chatbot of Ulama. Only ever answer
-      truthfully and be as helpful as you can!"
-      Context: ${contextText}
-      Question: """
-      ${input}
+      Tu sei 'Fania', l'assistente virtuale della piattaforma Ulama.
+      Di seguito troverai la trascrizione della lezione "Giorno 1: Il Miglior Business di Sempre"
+      Trascrizione: """
+      ${text}
       """
-      Answer as simple text:
+      La domanda è la seguente: """
+      ${input}
+      """ 
     `
-  
+
   return [
-    ...messages,
     {
       role: "user",
       content: prompt
